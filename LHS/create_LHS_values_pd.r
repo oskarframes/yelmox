@@ -1,22 +1,22 @@
 # LHS ensemble
 nr_v = 2
-nr_s = 50
+nr_s = 30
 
 filename = paste("/home/hpc/gwgi/gwgi028h/yelmo/patagonia_dev/yelmox/LHS/lhs_np", nr_v, "_ns", nr_s, ".txt",sep="")
 txt=read.table(filename,header=F, sep="")
 a=as.matrix(txt)
-colnames(a)=c("itm.itm_c","itm.itm_b")    # order of columns depending on Yelmo output
+colnames(a)=c("smbpal.sigma_melt","smbpal.sigma_snow")    # order of columns depending on Yelmo output
 nr=nrow(a)
 nc=ncol(a)
 
 # convert 0 to 1 numbers to variable domains
 # itmc, cgrz, kppgrz, fp, bt0, cffrzn, cfstrm, enhshr
 
-# itmc -10,-50
-a[,1]=a[,1]*(-50.000-(-10.000))+(-10.000)
+# sima_melt: 5 - 10 ######itmc -10,-50
+a[,1]=a[,1]*(10.0-5.0)+5.0
 
-# itmb 1,4
-a[,2]=a[,2]*(4-1)+1
+# sigma_snow: 5-10  ######itmb 1,4
+a[,2]=a[,2]*(10.0-5.0)+5.0
 
 # sland 5,10 
 #a[,3]=a[,2]
