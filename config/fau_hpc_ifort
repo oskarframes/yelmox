@@ -1,0 +1,56 @@
+FC = ifort
+
+#NETCDFC_ROOT = /albedo/soft/sw/spack-sw/netcdf-c/4.8.1-5ewdrxn
+#NETCDFFI_ROOT = /albedo/soft/sw/spack-sw/netcdf-fortran/4.5.4-rujc52i
+INC_NC  = -I${NETCDF_FORTRAN_ROOT}/include
+LIB_NC  = -L${NETCDF_FORTRAN_ROOT}/lib -lnetcdff -L${NETCDF_C_ROOT}/lib -lnetcdf
+# the -rpath options ensure that the same shared libraries are found at runtime
+
+FESMUTILSROOT=/home/saturn/gwgi/gwgi026h/RESPONSE/libs/fesm/utils
+INC_FESMUTILS = -I${FESMUTILSROOT}/include-serial
+LIB_FESMUTILS = -L${FESMUTILSROOT}/include-serial -lfesmutils
+
+FFTWROOT = /home/saturn/gwgi/gwgi026h/RESPONSE/libs/fesm/fftw-serial
+INC_FFTW = -I${FFTWROOT}/include
+LIB_FFTW = -L${FFTWROOT}/lib -lfftw3 
+
+LISROOT = /home/saturn/gwgi/gwgi026h/RESPONSE/libs/fesm/lis-serial
+INC_LIS = -I${LISROOT}/include 
+LIB_LIS = -L${LISROOT}/lib/ -llis
+
+ISOSTASYROOT = /home/saturn/gwgi/gwgi026h/RESPONSE/libs/fast-isostasy
+INC_ISOSTASY = -I${ISOSTASYROOT}/libisostasy/include 
+LIB_ISOSTASY = -L${ISOSTASYROOT}/libisostasy/include -lisostasy
+
+YELMOROOT = /home/saturn/gwgi/gwgi026h/RESPONSE/yelmo/patagonia_dev/yelmo
+INC_YELMO = -I${YELMOROOT}/libyelmo/include 
+LIB_YELMO = -L${YELMOROOT}/libyelmo/include -lyelmo
+
+#REMBOROOT = rembo1
+#INC_REMBO = -I${REMBOROOT}/librembo/include 
+#LIB_REMBO = -L${REMBOROOT}/librembo/include -lrembo
+
+FFLAGS  = -no-wrap-margin -module $(objdir) -L$(objdir)
+
+ifeq ($(openmp), 1)
+    FESMUTILSROOT=/home/saturn/gwgi/gwgi026h/RESPONSE/libs/fesm/utilsiso
+    INC_FESMUTILS = -I${FESMUTILSROOT}/include-omp
+    LIB_FESMUTILS = -L${FESMUTILSROOT}/include-omp -lfesmutils
+
+    FFTWROOT = /home/saturn/gwgi/gwgi026h/RESPONSE/libs/fesm/fftw-omp
+    INC_FFTW = -I${FFTWROOT}/include
+    LIB_FFTW = -L${FFTWROOT}/lib -lfftw3_omp -lfftw3
+
+    LISROOT = /home/saturn/gwgi/gwgi026h/RESPONSE/libs/fesm/lis-omp
+    INC_LIS = -I${LISROOT}/include 
+    LIB_LIS = -L${LISROOT}/lib/ -llis
+
+    FFLAGS  = -no-wrap-margin -module $(objdir) -L$(objdir) -qopenmp
+endif 
+
+LFLAGS  = $(LIB_YELMO) $(LIB_FESMUTILS) $(LIB_NC) $(LIB_LIS) $(LIB_FFTW) -Wl,-zmuldefs
+
+#DFLAGS_NODEBUG = -O2 -fp-model precise
+DFLAGS_NODEBUG = -Ofast -march=core-avx2 -mtune=core-avx2 -traceback #-recursive
+DFLAGS_DEBUG   = -C -O0 -g -traceback -ftrapuv -fpe0 -check all,nouninit -fp-model precise -debug extended -gen-interfaces -warn interfaces -check arg_temp_created
+DFLAGS_PROFILE = -O2 -fp-model precise -pg

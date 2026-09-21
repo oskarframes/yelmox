@@ -117,7 +117,20 @@
                 "wall" : "12:00:00" 
             }
         }
+    },
+    "fau_woody" :
+    {
+        "job_template"  : ".runme/submit_slurm",
+
+        "queues" :
+        {   "compute" :
+            {   "qos"  : "",
+                "partition" : "work",
+                "wall" : "24:00:00"
+            }
+        }
     }
+
 }
 
 

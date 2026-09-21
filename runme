@@ -158,7 +158,7 @@ def main():
     copy_exec = True 
 
     # If argument 'submit' is true, then ensure 'run' is also true
-    #if submit: run = True 
+    if submit: run = True 
     # ajr: disabled this, so that one has to explicitly also choose to run. 
     # that way, all directories could be generated included job.submit scripts,
     # and then jobs could be run another way.

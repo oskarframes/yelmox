@@ -1,16 +1,18 @@
-#!/bin/bash
-#SBATCH --qos=<QOS>
-#SBATCH --partition=<PARTITION>
+#!/bin/bash -l
+#SBATCH --nodes=1
+#SBATCH --tasks-per-node=1
+#SBATCH --partition=work
 #SBATCH --time=<WALL>
-#SBATCH --mem=<MEM>
 #SBATCH --job-name=<JOBNAME>
-#SBATCH --account=<ACCOUNT>
 #SBATCH --output=./out.out
 #SBATCH --error=./out.err
-#SBATCH --mem=5Gb
 <EMAILSECTION>
 
 <OMPSECTION>
+
+#### do not export environment variables
+unset SLURM_EXPORT_ENV
+## jobs always start in submit directory
 
 ulimit -s unlimited
 #ulimit -c unlimited
@@ -22,8 +24,16 @@ ulimit -v unlimited
 ulimit -a
 
 export GMON_OUT_PREFIX=./gmon
-export LD_LIBRARY_PATH=${NETCDF_FORTRANROOT}/lib:${NETCDF_CROOT}/lib:$LD_LIBRARY_PATH
-module load cdo
+#export LD_LIBRARY_PATH=${NETCDF_FORTRANROOT}/lib:${NETCDF_CROOT}/lib:$LD_LIBRARY_PATH
+#module load cdo
 
+#load required modules (compiler, MPI, ...)
+#module load intel
+#module load intelmpi
+#module load netcdf-fortran/4.5.3-intel2021.4.0-impi
+#module load netcdf-c/4.8.1-impi
+#
 # Run the job
-srun <CMD> 
+srun <CMD>
+#./yelmox.x yelmo_SPI_lia_new.nml
+
