@@ -1,0 +1,13 @@
+#####Permutation  #####
+jobrun ./runme -s -e yelmox -q compute -n par/{nml_file}.nml -o output/{output_folder} -p parameter_group1.parameter1 = value1 parameter_group2.parameter2 = value2
+
+Example:
+jobrun ./runme -s -e yelmox -q compute -n par/yelmo_NPI-700_cubica.nml -o output/NPI-700-per -p ytill.scale='lin','exp' geothermal.ghf_const=50,65
+
+## RUN from txt file ####
+jobrun ./runme -s -e yelmox -q compute -n par/{nml_file}.nml -o output/{output_folder} -i {txt_file}.txt
+
+Example:
+jobrun ./runme -s -e yelmox -q compute -n par/yelmo_NPI-700_cubica.nml -o output/NPI-700 -i lhs_4_select.txt
+
+
