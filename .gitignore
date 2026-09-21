@@ -18,3 +18,5 @@ check_sim.x
 git_yelmo.txt
 maps/*.nc
 .vscode
+input/INPUT-NPI/raw
+SPI-1KM
