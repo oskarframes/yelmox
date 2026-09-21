@@ -428,8 +428,8 @@ end if
 
     ! ===== Initialize output files ===== 
     
-    call yelmo_write_init(yelmo1,file2D,time_init=ts%time,units="years") 
-    call yelmo_write_init(yelmo1,file2D_small,time_init=ts%time,units="years") 
+    call yelmo_write_init(yelmo1,file2D,time_init=ts%time,units="years") ! avz 23.07.2025
+    !call yelmo_write_init(yelmo1,file2D_small,time_init=ts%time,units="years") 
     
     call yelmo_regions_write(yelmo1,ts%time,init=.TRUE.,units="years")
 
@@ -595,9 +595,9 @@ end if
             call yelmox_write_step(yelmo1,snp1,mshlf1,smbpal1,file2D,time=ts%time)
         end if
 
-        if (timeout_check(tm_2Dsm,ts%time)) then 
-            call yelmo_write_step(yelmo1,file2D_small,ts%time,compare_pd=.FALSE.)
-        end if
+        ! if (timeout_check(tm_2Dsm,ts%time)) then  ! avz 24.07.2025
+        !     call yelmo_write_step(yelmo1,file2D_small,ts%time,compare_pd=.FALSE.)
+        ! end if
 
         if (timeout_check(tm_1D,ts%time)) then 
             call yelmo_regions_write(yelmo1,ts%time)

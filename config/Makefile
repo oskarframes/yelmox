@@ -56,18 +56,20 @@ isostasy-static:
 
 # Compile the static library libyelmo,
 # using Makefile located in $(YELMOROOT) directory 
-rembo-static: 
-	$(MAKE) -C $(REMBOROOT) rembo-static 
+#rembo-static: 
+#	$(MAKE) -C $(REMBOROOT) rembo-static 
 
 yelmox : yelmo-static isostasy-static $(yelmox_libs)
-	$(FC) $(DFLAGS) $(FFLAGS) $(INC_FESMUTILS) $(INC_LIS) $(INC_ISOSTASY) $(INC_YELMO) -o $(bindir)/yelmox.x yelmox.f90 \
+	$(FC) $(DFLAGS) $(FFLAGS) $(INC_FESMUTILS) $(INC_ISOSTASY) $(INC_LIS) $(INC_YELMO) -o $(bindir)/yelmox.x yelmox.f90 \
 		$(yelmox_libs) $(LFLAGS)
 	@echo " "
 	@echo "    yelmox.x is ready."
 	@echo " "
 
+
+
 yelmoxmg : yelmo-static isostasy-static $(yelmox_libs)
-	$(FC) $(DFLAGS) $(FFLAGS) $(INC_FESMUTILS) $(INC_LIS) $(INC_ISOSTASY) $(INC_YELMO) -o $(bindir)/yelmoxmg.x yelmox.f90 \
+	$(FC) $(DFLAGS) $(FFLAGS) $(INC_ISOSTASY) $(INC_FESMUTILS) $(INC_LIS) $(INC_YELMO) -o $(bindir)/yelmoxmg.x yelmox.f90 \
 		$(yelmox_libs) $(LFLAGS)
 	@echo " "
 	@echo "    yelmoxmg.x is ready."
@@ -115,12 +117,12 @@ yelmox_nahosmip : yelmo-static isostasy-static $(yelmox_libs)
 	@echo "    yelmox_nahosmip.x is ready."
 	@echo " "
 
-yelmox_rembo: yelmo-static rembo-static isostasy-static $(yelmox_libs)
-	$(FC) $(DFLAGS) $(FFLAGS) $(INC_FESMUTILS) $(INC_LIS) $(INC_ISOSTASY) $(INC_YELMO) $(INC_REMBO) -o libyelmox/bin/yelmox_rembo.x \
-			yelmox_rembo.f90 $(LIB_REMBO) $(yelmox_libs) $(LFLAGS)
-	@echo " "
-	@echo "    libyelmox/bin/yelmox_rembo.x is ready."
-	@echo " "
+#yelmox_rembo: yelmo-static rembo-static isostasy-static $(yelmox_libs)
+#	$(FC) $(DFLAGS) $(FFLAGS) $(INC_FESMUTILS) $(INC_LIS) $(INC_ISOSTASY) $(INC_YELMO) $(INC_REMBO) -o libyelmox/bin/yelmox_rembo.x \
+#			yelmox_rembo.f90 $(LIB_REMBO) $(yelmox_libs) $(LFLAGS)
+#	@echo " "
+#	@echo "    libyelmox/bin/yelmox_rembo.x is ready."
+#	@echo " "
 
 yelmox_bipolar : yelmo-static isostasy-static $(yelmox_libs)
 	$(FC) $(DFLAGS) $(FFLAGS) $(INC_FESMUTILS) $(INC_LIS) $(INC_YELMO) $(INC_ISOSTASY) -o $(bindir)/yelmox_bipolar.x yelmox_bipolar.f90 \
@@ -161,4 +163,4 @@ clean:
 cleanall: clean
 	$(MAKE) -C $(ISOSTASYROOT) clean
 	$(MAKE) -C $(YELMOROOT) clean
-	$(MAKE) -C $(REMBOROOT) clean
+#	$(MAKE) -C $(REMBOROOT) clean

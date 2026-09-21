@@ -340,8 +340,8 @@ contains
 
         end if 
 
-
-        ! In case we are using the hybrid monthly anomaly time series to generate climate forcing
+	!commented out, avz 14.07.2025
+        !In case we are using the hybrid monthly anomaly time series to generate climate forcing
         if (trim(snp%par%atm_type) .eq. "hybrid" .or. trim(snp%par%ocn_type) .eq. "hybrid") then  
             call read_series_hybrid(snp%hybrid%dTmon,snp%hybrid%hybrid_path, &
                         snp%hybrid%f_eem,snp%hybrid%f_glac,snp%hybrid%f_hol,snp%hybrid%f_seas)
@@ -1551,7 +1551,7 @@ contains
         !call nml_read(filename,nml_group,"f_p_ne",             par%f_p_ne,         init=init_pars)
         call nml_read(filename,nml_group,"f_stdev",            par%f_stdev,        init=init_pars)
         
-        call nml_read(filename,trim(nml_group)//"_hybrid","hybrid_path", hpar%hybrid_path,  init=init_pars)
+        call nml_read(filename,trim(nml_group)//"_hybrid","hybrid_path", hpar%hybrid_path,  init=init_pars) !commented out, avz 14.07.2025
         call nml_read(filename,trim(nml_group)//"_hybrid","f_eem",       hpar%f_eem,        init=init_pars)
         call nml_read(filename,trim(nml_group)//"_hybrid","f_glac",      hpar%f_glac,       init=init_pars)
         call nml_read(filename,trim(nml_group)//"_hybrid","f_hol",       hpar%f_hol,        init=init_pars)
