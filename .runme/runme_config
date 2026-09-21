@@ -1,6 +1,6 @@
 {
     "hpc"           : "fau_woody",
-    "account"       : "megarun", 
+    "account"       : "gwgi",
     "jobname"       : "yelmox",
     "omp"           : 0,
     "mem"           : -1,
